@@ -9,6 +9,7 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased selection:bg-blue-500 selection:text-white">
 
+    <!-- Top Navigation Header -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -16,22 +17,24 @@
                 <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">RegulaFalsi<span class="text-blue-500">.io</span></span>
             </div>
             <div class="flex items-center space-x-4">
-                <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded-full border border-slate-700/50">v1.0.0</span>
+                <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded-full border border-slate-700/50">v1.1.0</span>
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Hero Conceptual Overview Section -->
         <div class="mb-8 p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-800 shadow-xl">
-            <h2 class="text-xl font-bold text-white mb-2">False Position Numerical Solver</h2>
+            <h2 class="text-xl font-bold text-white mb-2">False Position Numerical Solver (High Precision Mode)</h2>
             <p class="text-sm text-slate-400 max-w-3xl leading-relaxed">
                 The Regula Falsi method approximates real roots of continuous functions by taking an interval <code class="text-blue-400 font-mono">[a, b]</code> where the function changes sign. It finds the intersection point <code class="text-emerald-400 font-mono">c</code> of the secant line crossing <code class="text-slate-300">(a, f(a))</code> and <code class="text-slate-300">(b, f(b))</code>, systematically narrowing down the bounds until it achieves your requested target precision.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <!-- Left Panel: Configurations & Controls -->
             <div class="space-y-6 lg:col-span-1">
-                <div class="bg-slate-850 bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-5">
                     <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Control Configuration</h3>
                     
                     <div>
@@ -53,7 +56,7 @@
 
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1.5 uppercase">Tolerance Threshold (eps)</label>
-                        <input id="eps" type="number" value="0.0001" step="any" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-sm font-mono focus:outline-none focus:border-blue-500 transition text-white">
+                        <input id="eps" type="number" value="0.0000000001" step="any" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-sm font-mono focus:outline-none focus:border-blue-500 transition text-white">
                     </div>
 
                     <button onclick="runSolver()" class="w-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium py-2.5 px-4 rounded-xl transition duration-150 shadow-lg shadow-blue-600/20 active:scale-[0.98]">
@@ -63,17 +66,20 @@
                     <div id="errorBox" class="p-3 bg-red-900/30 border border-red-800/50 text-red-400 text-xs rounded-xl hidden"></div>
                 </div>
 
+                <!-- Template quick injections -->
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
                     <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Preset Test Cases</h3>
                     <div class="space-y-2">
-                        <button onclick="injectPreset('x*log10(x) - 1', 1, 3, 0.0001)" class="w-full text-left text-xs bg-slate-950 hover:bg-slate-800 border border-slate-800/60 p-2.5 rounded-xl transition flex justify-between font-mono"><span>x*log10(x) - 1</span> <span class="text-blue-400">[1, 3]</span></button>
-                        <button onclick="injectPreset('pow(x, 2) - 4', 0, 3, 0.0001)" class="w-full text-left text-xs bg-slate-950 hover:bg-slate-800 border border-slate-800/60 p-2.5 rounded-xl transition flex justify-between font-mono"><span>x² - 4</span> <span class="text-blue-400">[0, 3]</span></button>
-                        <button onclick="injectPreset('cos(x) - x', 0, 1, 0.0001)" class="w-full text-left text-xs bg-slate-950 hover:bg-slate-800 border border-slate-800/60 p-2.5 rounded-xl transition flex justify-between font-mono"><span>cos(x) - x</span> <span class="text-blue-400">[0, 1]</span></button>
+                        <button onclick="injectPreset('x*log10(x) - 1', 1, 3, 0.0000000001)" class="w-full text-left text-xs bg-slate-950 hover:bg-slate-800 border border-slate-800/60 p-2.5 rounded-xl transition flex justify-between font-mono"><span>x*log10(x) - 1</span> <span class="text-blue-400">[1, 3]</span></button>
+                        <button onclick="injectPreset('pow(x, 2) - 4', 0, 3, 0.0000000001)" class="w-full text-left text-xs bg-slate-950 hover:bg-slate-800 border border-slate-800/60 p-2.5 rounded-xl transition flex justify-between font-mono"><span>x² - 4</span> <span class="text-blue-400">[0, 3]</span></button>
+                        <button onclick="injectPreset('cos(x) - x', 0, 1, 0.0000000001)" class="w-full text-left text-xs bg-slate-950 hover:bg-slate-800 border border-slate-800/60 p-2.5 rounded-xl transition flex justify-between font-mono"><span>cos(x) - x</span> <span class="text-blue-400">[0, 1]</span></button>
                     </div>
                 </div>
             </div>
 
+            <!-- Right Panel: Visual Display Output Dashboards -->
             <div class="space-y-8 lg:col-span-2">
+                <!-- Graphical Display Curve Section -->
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
                     <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Functional Plot Real-time Space</h3>
                     <div class="p-2 bg-slate-950 rounded-xl border border-slate-850">
@@ -81,6 +87,7 @@
                     </div>
                 </div>
 
+                <!-- Numerical Analysis Calculations Output Grid -->
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center bg-slate-850">
                         <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Iterative Matrix Trace Log</h3>
@@ -153,17 +160,20 @@
 
             let steps = [];
             let c = a;
-            let maxIter = 100;
+            let maxIter = 10000; // Increased loop threshold limit for tracking highly persistent curves
 
             for (let iter = 1; iter <= maxIter; iter++) {
                 let current_fa = f(a);
                 let current_fb = f(b);
+                
+                // Pure False Position Intersect Approximation formula
                 c = (a * current_fb - b * current_fa) / (current_fb - current_fa);
                 let fc = f(c);
 
                 steps.push({ iter, a, b, c, fc });
 
-                if (Math.abs(fc) < eps_val || Math.abs(b - a) < 1e-15) break;
+                // Enhanced convergence escape criteria up to 64-bit float precision bounds
+                if (Math.abs(fc) < eps_val || Math.abs(b - a) < 1e-18) break;
 
                 if (current_fa * fc < 0) { b = c; } 
                 else { a = c; }
@@ -175,10 +185,10 @@
                 const row = `
                     <tr class="hover:bg-slate-800/30 transition">
                         <td class="p-3 text-slate-500">${s.iter}</td>
-                        <td class="p-3">${s.a.toFixed(6)}</td>
-                        <td class="p-3">${s.b.toFixed(6)}</td>
-                        <td class="p-3 font-semibold text-blue-400">${s.c.toFixed(6)}</td>
-                        <td class="p-3 ${Math.abs(s.fc) < eps_val ? 'text-emerald-400' : 'text-slate-400'}">${s.fc.toExponential(4)}</td>
+                        <td class="p-3">${s.a.toFixed(12)}</td>
+                        <td class="p-3">${s.b.toFixed(12)}</td>
+                        <td class="p-3 font-semibold text-blue-400">${s.c.toFixed(12)}</td>
+                        <td class="p-3 ${Math.abs(s.fc) < eps_val ? 'text-emerald-400' : 'text-slate-400'}">${s.fc.toExponential(6)}</td>
                     </tr>`;
                 tableBody.innerHTML += row;
             });
@@ -249,7 +259,7 @@
                             intersect: false,
                             callbacks: {
                                 title: (context) => `Coordinate Track`,
-                                label: (context) => `X: ${context.parsed.x.toFixed(6)} | Y: ${context.parsed.y.toFixed(6)}`
+                                label: (context) => `X: ${context.parsed.x.toFixed(12)} | Y: ${context.parsed.y.toFixed(12)}`
                             }
                         }
                     }
